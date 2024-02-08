@@ -1,6 +1,6 @@
 // ProductListing.js
 import { useNavigate } from "react-router-dom";
-import { shoesData } from "./exampleProductAPI.js";
+import { shoesData } from "./utils/exampleProductAPI.js";
 import { useCart } from "./contextAPIs/useCart.js";
 
 const ProductListing = () => {

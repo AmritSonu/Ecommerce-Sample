@@ -8,7 +8,8 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       return [...state, action.payload];
-    // Add other cases for handling cart actions if needed
+    case "CLEAR_CART":
+      return [];
     default:
       return state;
   }
@@ -21,12 +22,16 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: "ADD_TO_CART", payload: item });
   };
 
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
+
   const isInCart = (itemId) => {
     return cart.some((item) => item.id === itemId);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, isInCart }}>
+    <CartContext.Provider value={{ cart, addToCart, clearCart, isInCart }}>
       {children}
     </CartContext.Provider>
   );

@@ -3,7 +3,7 @@ import "./App.css";
 import ProductListing from "./components/ProductListing";
 import Layout from "./components/Layout";
 import CheckoutPage from "./components/CheckoutPage";
-import { CartProvider } from "./components/CartContextAPI";
+import { CartProvider } from "./components/contextAPIs/CartContextAPI";
 import ReviewSubmit from "./components/ReviewSubmit";
 
 function App() {

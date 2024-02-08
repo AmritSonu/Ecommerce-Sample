@@ -1,13 +1,14 @@
 // ReviewSubmit.js
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "./contextAPIs/useCart.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ReviewSubmit = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const { customerInfo, totalPrice } = location.state;
 
   const handleBackBtn = () => {
@@ -19,17 +20,35 @@ const ReviewSubmit = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      // Navigate back to the home page
+      clearCart();
+    }, 2000);
+
+    setTimeout(() => {
+      setIsOrderPlaced(true);
+    }, 3000);
+
+    setTimeout(() => {
       navigate("/", { order: true });
-    }, 5000);
+    }, 4000);
   };
+
+  useEffect(() => {
+    // Cleanup function to reset isOrderPlaced after leaving the component
+    return () => setIsOrderPlaced(false);
+  }, []);
 
   return (
     <div className="container mx-auto mt-8">
       {isLoading ? (
-        <div className=" flex items-center justify-center h-80 my-10">
+        <div className="flex items-center justify-center h-80 my-10">
           <p className="font-bold text-4xl animate-bounce">
             Placing Your Order...
+          </p>
+        </div>
+      ) : isOrderPlaced ? (
+        <div className="flex items-center justify-center h-80 my-10">
+          <p className="font-bold text-4xl text-green-600">
+            Order Placed Successfully!
           </p>
         </div>
       ) : (

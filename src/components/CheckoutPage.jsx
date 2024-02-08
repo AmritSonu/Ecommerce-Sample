@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "./contextAPIs/useCart";
-import { validateEmail, validatePhone } from "./validateInfo.js";
+import { validateEmail, validatePhone } from "./utils/validateInfo.js";
 import { useState } from "react";
 
 const calculateTotal = (cartItems) => {
